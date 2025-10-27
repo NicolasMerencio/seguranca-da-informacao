@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conceitos & Fundamentos — Segurança da Informação</title>
+
+  <!-- CSS Global -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../imagens/favicon/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner container">
+      <div class="logo">
+        <a href="../index.html" aria-label="Ir para a página inicial">
+          <img src="../imagens/index/logo.png" alt="Logotipo - Especialista de Segurança da Informação">
+        </a>
+        <h1>Conceitos & Fundamentos</h1>
+      </div>
+
+      <!-- Navegação principal -->
+      <nav id="main-nav" role="navigation" aria-label="Menu principal">
+        <ul id="navList">
+          <li><a href="conceitos-fundamentos.html" class="active">Conceitos & Fundamentos</a></li>
+          <li><a href="areas-de-atuacao.html">Áreas de Atuação</a></li>
+          <li><a href="habilidades-formacao.html">Habilidades & Formação</a></li>
+          <li><a href="normas-leis.html">Normas, Leis & Mercado</a></li>
+          <li><a href="processos-entregaveis.html">Processos & Entregáveis</a></li>
+          <li><a href="riscos-desafios.html">Riscos, Desafios & Tendências</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main id="main-content">
+
+    <!-- INTRODUÇÃO -->
+    <section id="intro" class="fade-up" aria-labelledby="intro-title">
+      <div class="container">
+        <h2 id="intro-title">O que você precisa saber sobre Conceitos & Fundamentos</h2>
+        <p>
+          Segurança da Informação envolve proteger dados, sistemas e redes, garantindo que informações importantes permaneçam confiáveis, confidenciais e acessíveis. 
+          Não é apenas tecnologia: pessoas, processos e governança são igualmente importantes.
+        </p>
+        <img src="../imagens/conceitos/intro.jpg" alt="Ilustração de proteção de dados" loading="lazy" class="intro-img">
+      </div>
+    </section>
+
+    <!-- TRIADE CIA -->
+    <section id="cia" class="fade-up" aria-labelledby="cia-title">
+      <div class="container">
+        <h2 id="cia-title">A Tríade Fundamental: Confidencialidade, Integridade e Disponibilidade</h2>
+        <div class="cards-section">
+          <article class="card">
+            <h3>Confidencialidade</h3>
+            <p>Garante que apenas pessoas autorizadas tenham acesso às informações. Protege dados sensíveis contra vazamentos e acessos indevidos.</p>
+          </article>
+          <article class="card">
+            <h3>Integridade</h3>
+            <p>Assegura que os dados não sejam alterados de forma indevida, preservando a exatidão e confiabilidade das informações.</p>
+          </article>
+          <article class="card">
+            <h3>Disponibilidade</h3>
+            <p>Garante que sistemas e dados estejam acessíveis quando necessário, mesmo diante de falhas, ataques ou imprevistos.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- AMEAÇAS E VETORES -->
+    <section id="ameacas" class="fade-up" aria-labelledby="ameacas-title">
+      <div class="container">
+        <h2 id="ameacas-title">Principais Ameaças e Vetores de Ataque</h2>
+        <p>Conhecer os riscos é essencial para proteger efetivamente os sistemas:</p>
+        <ul>
+          <li><strong>Aplicações:</strong> injeção de código, falhas de controle de acesso, design inseguro.</li>
+          <li><strong>Redes e infraestrutura:</strong> ataques DDoS, exploração de serviços expostos, VPNs comprometidas.</li>
+          <li><strong>Pessoas:</strong> phishing, engenharia social, credenciais fracas.</li>
+        </ul>
+        <img src="../imagens/conceitos/ameacas.jpg" alt="Ilustração de ameaças cibernéticas" loading="lazy" class="intro-img">
+      </div>
+    </section>
+
+    <!-- FRAMEWORKS E NORMAS -->
+    <section id="frameworks" class="fade-up" aria-labelledby="frameworks-title">
+      <div class="container">
+        <h2 id="frameworks-title">Frameworks e Normas</h2>
+        <p>Frameworks e normas ajudam a organizar práticas de segurança:</p>
+        <div class="cards-section">
+          <article class="card">
+            <h3>NIST Cybersecurity Framework</h3>
+            <p>Modelo de funções de alto nível: Identificar, Proteger, Detectar, Responder e Recuperar. Ajuda a estruturar e medir práticas de segurança.</p>
+          </article>
+          <article class="card">
+            <h3>ISO/IEC 27001</h3>
+            <p>Padrão internacional para Sistemas de Gestão de Segurança da Informação, definindo controles e processos para gerenciar riscos e demonstrar conformidade.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTROLES E DEFESA EM CAMADAS -->
+    <section id="controles" class="fade-up" aria-labelledby="controles-title">
+      <div class="container">
+        <h2 id="controles-title">Controles e Defesa em Camadas</h2>
+        <p>A segurança é mais eficaz quando aplicada em múltiplas camadas:</p>
+        <ul>
+          <li><strong>Perímetro e rede:</strong> firewalls, segmentação, VPNs, IDS/IPS.</li>
+          <li><strong>Hosts e sistemas:</strong> hardening, patches, proteção de endpoints.</li>
+          <li><strong>Aplicações:</strong> validação de entradas, autenticação forte, revisão de código.</li>
+          <li><strong>Dados:</strong> criptografia, prevenção de perda de dados (DLP).</li>
+          <li><strong>Processos:</strong> backups, políticas, playbooks e treinamentos.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- BOAS PRÁTICAS -->
+    <section id="boas-praticas" class="fade-up" aria-labelledby="boas-title">
+      <div class="container">
+        <h2 id="boas-title">Boas Práticas Essenciais</h2>
+        <p>Para começar a aplicar segurança da informação de forma prática:</p>
+        <ul>
+          <li>Inventariar e classificar ativos críticos.</li>
+          <li>Implementar autenticação multifator (MFA).</li>
+          <li>Manter sistemas atualizados e com patches aplicados.</li>
+          <li>Realizar backups regulares e testar a restauração.</li>
+          <li>Monitorar logs e alertas de segurança.</li>
+          <li>Treinar usuários em phishing e boas práticas.</li>
+          <li>Adotar um framework de segurança (NIST ou ISO) para governança.</li>
+        </ul>
+        <img src="../imagens/conceitos/boas-praticas.jpg" alt="Ilustração de boas práticas em segurança" loading="lazy" class="intro-img">
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Especialista em Segurança da Informação. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Botão voltar ao topo -->
+  <button id="backToTop" class="hidden" title="Voltar ao topo" aria-label="Voltar ao topo">↑</button>
+
+  <!-- JS Global -->
+  <script src="script.js"></script>
+
+</body>
+</html>

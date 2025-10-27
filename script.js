@@ -1,498 +1,707 @@
-/* script.js — Versão refeita, robusta e responsiva
-   Funcionalidades:
-   - calcula e define --header-height (offset seguro)
-   - header scrolled / hide-on-scroll / show-on-scroll
-   - mobile nav (toggle, overlay clone, foco, ESC, clique fora)
-   - smooth scroll (considera header height)
-   - active nav highlighting (IntersectionObserver)
-   - back-to-top button (visível após scroll)
-   - fade-up reveal (IntersectionObserver)
-   - particles init (se existir canvas e support)
-   - respeito a prefers-reduced-motion
-   - proteção contra erros e listeners otimizados (throttle/debounce)
-*/
+/**
+ * script.js - Segurança da Informação
+ * Versão moderna, performática e acessível
+ * 
+ * Funcionalidades:
+ * - Sistema de partículas performático
+ * - Navegação mobile acessível
+ * - Scroll suave e inteligente
+ * - Animações otimizadas
+ * - Gerenciamento de estado robusto
+ * - Performance otimizada
+ */
 
-(function () {
-  'use strict';
+class SecurityInfoWebsite {
+    constructor() {
+        // Estado da aplicação
+        this.state = {
+            scrollY: 0,
+            lastScrollY: 0,
+            headerHeight: 0,
+            isMobileMenuOpen: false,
+            reducedMotion: false
+        };
 
-  /* ---------- utilitários ---------- */
-  const $ = (s, ctx = document) => ctx.querySelector(s);
-  const $$ = (s, ctx = document) => Array.from(ctx.querySelectorAll(s));
-  const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        // Elementos DOM
+        this.elements = {
+            header: null,
+            main: null,
+            nav: null,
+            navList: null,
+            menuToggle: null,
+            backToTop: null,
+            canvasBg: null,
+            canvasVideo: null
+        };
 
-  function throttle(fn, wait = 120) {
-    let last = 0, scheduled = null;
-    return function (...args) {
-      const now = Date.now();
-      const remaining = wait - (now - last);
-      if (remaining <= 0) {
-        if (scheduled) { cancelAnimationFrame(scheduled); scheduled = null; }
-        last = now;
-        fn.apply(this, args);
-      } else if (!scheduled) {
-        scheduled = requestAnimationFrame(() => {
-          last = Date.now();
-          scheduled = null;
-          fn.apply(this, args);
+        // Instâncias
+        this.particles = {
+            bg: null,
+            video: null
+        };
+
+        // Configurações
+        this.config = {
+            scrollThreshold: 300,
+            scrollDelta: 10,
+            headerHideThreshold: 100,
+            intersectionThreshold: 0.1,
+            particleCount: {
+                bg: 50,
+                video: 20
+            }
+        };
+
+        this.init();
+    }
+
+    /**
+     * Inicialização principal
+     */
+    init() {
+        // Verificar preferências do usuário
+        this.checkUserPreferences();
+        
+        // Encontrar elementos DOM
+        this.findDOMElements();
+        
+        // Inicializar funcionalidades
+        this.initHeader();
+        this.initNavigation();
+        this.initSmoothScroll();
+        this.initScrollAnimations();
+        this.initBackToTop();
+        this.initParticles();
+        this.initIntersectionObservers();
+
+        // Configurar event listeners
+        this.setupEventListeners();
+
+        console.log('🚀 Website inicializado com sucesso');
+    }
+
+    /**
+     * Verificar preferências do usuário
+     */
+    checkUserPreferences() {
+        this.state.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        
+        // Log para debugging (remover em produção)
+        if (this.state.reducedMotion) {
+            console.log('🔧 Movimento reduzido detectado - animações desativadas');
+        }
+    }
+
+    /**
+     * Encontrar elementos DOM
+     */
+    findDOMElements() {
+        this.elements = {
+            header: document.querySelector('header'),
+            main: document.querySelector('main') || document.body,
+            nav: document.querySelector('nav'),
+            navList: document.querySelector('#navList'),
+            menuToggle: document.querySelector('.menu-toggle'),
+            backToTop: document.querySelector('#backToTop'),
+            canvasBg: document.querySelector('#backgroundParticles'),
+            canvasVideo: document.querySelector('#particles')
+        };
+    }
+
+    /**
+     * Inicializar header e scroll behavior
+     */
+    initHeader() {
+        if (!this.elements.header) return;
+
+        // Calcular altura do header
+        this.updateHeaderHeight();
+
+        // Configurar scroll do header
+        this.handleHeaderScroll();
+    }
+
+    /**
+     * Atualizar altura do header
+     */
+    updateHeaderHeight() {
+        const rect = this.elements.header.getBoundingClientRect();
+        this.state.headerHeight = Math.ceil(rect.height);
+        
+        // Atualizar CSS custom property
+        document.documentElement.style.setProperty('--header-height', `${this.state.headerHeight}px`);
+        
+        // Fallback para main
+        if (this.elements.main) {
+            this.elements.main.style.paddingTop = `var(--header-height, ${this.state.headerHeight}px)`;
+        }
+    }
+
+    /**
+     * Manipular scroll do header
+     */
+    handleHeaderScroll() {
+        const currentY = window.scrollY;
+        const delta = currentY - this.state.lastScrollY;
+
+        // Adicionar classe "scrolled" quando passar de um ponto
+        if (currentY > 20) {
+            this.elements.header.classList.add('scrolled');
+        } else {
+            this.elements.header.classList.remove('scrolled');
+        }
+
+        // Esconder/mostrar header inteligentemente
+        if (Math.abs(delta) > this.config.scrollDelta) {
+            if (delta > 0 && currentY > this.state.headerHeight + this.config.headerHideThreshold) {
+                this.elements.header.classList.add('hidden');
+            } else {
+                this.elements.header.classList.remove('hidden');
+            }
+            this.state.lastScrollY = currentY;
+        }
+
+        this.state.scrollY = currentY;
+    }
+
+    /**
+     * Inicializar sistema de navegação
+     */
+    initNavigation() {
+        // Criar menu mobile se necessário
+        this.createMobileNavigation();
+        
+        // Configurar navegação ativa
+        this.setupActiveNavigation();
+    }
+
+    /**
+     * Criar navegação mobile
+     */
+    createMobileNavigation() {
+        if (!this.elements.nav || !this.elements.menuToggle) return;
+
+        // Configurar toggle do menu
+        this.elements.menuToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.toggleMobileMenu();
         });
-      }
-    };
-  }
 
-  function debounce(fn, wait = 120) {
-    let t;
-    return function (...args) {
-      clearTimeout(t);
-      t = setTimeout(() => fn.apply(this, args), wait);
-    };
-  }
-
-  /* ---------- elementos ---------- */
-  const header = $('header');
-  const main = $('main') || document.body;
-  const desktopNav = $('nav'); // nav desktop
-  const desktopNavList = $('#navList');
-  const backToTopBtn = $('#backToTop');
-  const canvasBg = $('#backgroundParticles');
-  const canvasVideo = $('#particles');
-
-  /* variáveis de estado */
-  let headerHeight = 0;
-  let lastScrollY = window.scrollY || 0;
-  let ticking = false;
-
-  /* ---------- calcula e aplica altura do header (CSS var) ---------- */
-  function updateHeaderHeight() {
-    if (!header) return;
-    const h = Math.ceil(header.getBoundingClientRect().height);
-    headerHeight = h;
-    document.documentElement.style.setProperty('--header-height', `${h}px`);
-    // fallback inline padding-top para main (se desejar)
-    if (main) main.style.paddingTop = `var(--header-height, ${h}px)`;
-  }
-
-  /* ---------- mostrar/ocultar header ao rolar ---------- */
-  const SCROLL_DELTA = 12;
-  function handleHeaderOnScroll() {
-    if (!header) return;
-    const currentY = window.scrollY || 0;
-
-    // adição visual quando passa um ponto
-    if (currentY > 20) header.classList.add('scrolled'); else header.classList.remove('scrolled');
-
-    // hide/show inteligente
-    const delta = currentY - lastScrollY;
-    if (Math.abs(delta) > SCROLL_DELTA) {
-      if (delta > 0 && currentY > headerHeight + 60) {
-        header.classList.add('hidden');
-      } else {
-        header.classList.remove('hidden');
-      }
-      lastScrollY = currentY;
-    }
-
-    // back to top visibility
-    if (backToTopBtn) {
-      if (currentY > 320) backToTopBtn.classList.add('visible');
-      else backToTopBtn.classList.remove('visible');
-    }
-  }
-
-  /* ---------- active link via IntersectionObserver (mais eficiente) ---------- */
-  function setupActiveSectionObserver() {
-    try {
-      const sections = $$('section[id]');
-      if (!sections.length || !desktopNavList) return;
-
-      const linkMap = new Map();
-      $$('a', desktopNavList).forEach(a => {
-        const href = a.getAttribute('href') || '';
-        const id = href.includes('#') ? href.split('#')[1] : null;
-        if (id) linkMap.set(id, a);
-      });
-
-      // garante que só 1 link fique ativo: quando uma seção está suficientemente visível
-      const observer = new IntersectionObserver((entries) => {
-        // ordena por interseção para escolher o mais visível
-        entries.forEach(entry => {
-          const id = entry.target.id;
-          const link = linkMap.get(id);
-          if (!link) return;
-          if (entry.isIntersecting && entry.intersectionRatio > 0.35) {
-            // remove active de todos e aplica neste
-            linkMap.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-          } else {
-            // se não é intersecting, só remove desta (não limpa todo o mapa)
-            link.classList.remove('active');
-          }
+        // Fechar menu ao clicar em links
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (this.state.isMobileMenuOpen) {
+                    this.closeMobileMenu();
+                }
+            });
         });
-      }, { root: null, rootMargin: `-${Math.round(headerHeight * 0.25)}px 0px -40% 0px`, threshold: [0.25, 0.35, 0.6] });
-
-      sections.forEach(s => observer.observe(s));
-    } catch (e) {
-      // fallback leve: ativa por scroll position (mais simples)
-      // console.warn('Active observer failed', e);
     }
-  }
 
-  /* ---------- smooth scroll para âncoras internas (considera header) ---------- */
-  function initSmoothAnchors() {
-    // usa delegation para pegar todos os links internos, inclusive mobile cloned
-    document.addEventListener('click', function (ev) {
-      const a = ev.target.closest && ev.target.closest('a[href^="#"]');
-      if (!a) return;
-      const href = a.getAttribute('href');
-      if (!href || href === '#') return;
-      const id = href.slice(1);
-      const target = document.getElementById(id);
-      if (!target) return;
-      ev.preventDefault();
-      // calcula posição considerando headerHeight (lê var atual)
-      const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - headerHeight - 8);
-      if (isReducedMotion) window.scrollTo(0, top);
-      else window.scrollTo({ top, behavior: 'smooth' });
+    /**
+     * Alternar menu mobile
+     */
+    toggleMobileMenu() {
+        if (this.state.isMobileMenuOpen) {
+            this.closeMobileMenu();
+        } else {
+            this.openMobileMenu();
+        }
+    }
 
-      // se mobile nav estiver aberta, fecha
-      if (document.body.classList.contains('nav-open')) {
-        closeMobileNav();
-      }
+    /**
+     * Abrir menu mobile
+     */
+    openMobileMenu() {
+        this.elements.nav.classList.add('active');
+        this.elements.menuToggle.classList.add('active');
+        this.elements.menuToggle.setAttribute('aria-expanded', 'true');
+        this.state.isMobileMenuOpen = true;
+        
+        // Prevenir scroll do body
+        document.body.style.overflow = 'hidden';
+    }
 
-      // acessibilidade: colocar foco programático
-      target.setAttribute('tabindex', '-1');
-      target.focus({ preventScroll: true });
-    });
-  }
+    /**
+     * Fechar menu mobile
+     */
+    closeMobileMenu() {
+        this.elements.nav.classList.remove('active');
+        this.elements.menuToggle.classList.remove('active');
+        this.elements.menuToggle.setAttribute('aria-expanded', 'false');
+        this.state.isMobileMenuOpen = false;
+        
+        // Restaurar scroll do body
+        document.body.style.overflow = '';
+    }
 
-  /* ---------- fade-up reveal ---------- */
-  function initFadeUp() {
-    try {
-      const els = $$('.fade-up');
-      if (!els.length) return;
-      const obs = new IntersectionObserver((entries, o) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in');
-            o.unobserve(entry.target);
-          }
+    /**
+     * Configurar navegação ativa
+     */
+    setupActiveNavigation() {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('nav a');
+
+        if (!sections.length || !navLinks.length) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio > 0.35) {
+                    const id = entry.target.id;
+                    
+                    // Remover active de todos os links
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    
+                    // Adicionar active ao link correspondente
+                    const activeLink = document.querySelector(`nav a[href="#${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            });
+        }, {
+            root: null,
+            rootMargin: `-${Math.round(this.state.headerHeight * 0.25)}px 0px -40% 0px`,
+            threshold: [0.25, 0.35, 0.6]
         });
-      }, { threshold: 0.18 });
-      els.forEach(el => obs.observe(el));
-    } catch (e) { /* silently fail */ }
-  }
 
-  /* ---------- BACK TO TOP ---------- */
-  function initBackToTop() {
-    if (!backToTopBtn) return;
-    backToTopBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (isReducedMotion) window.scrollTo(0, 0);
-      else window.scrollTo({ top: 0, behavior: 'smooth' });
-      // foco em main por accessibilidade
-      if (main) {
-        main.setAttribute('tabindex', '-1');
-        main.focus({ preventScroll: true });
-      }
-    });
-    // teclado
-    backToTopBtn.addEventListener('keyup', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') backToTopBtn.click();
-    });
-  }
+        sections.forEach(section => observer.observe(section));
+    }
 
-  /* ---------- PARTICULAS (optimizado) ---------- */
-  function initBgParticles() {
-    if (!canvasBg || !canvasBg.getContext) return;
-    try {
-      const ctx = canvasBg.getContext('2d');
-      let W = 0, H = 0, particles = [], raf = null;
-      const deviceRatio = Math.max(1, window.devicePixelRatio || 1);
+    /**
+     * Inicializar scroll suave
+     */
+    initSmoothScroll() {
+        document.addEventListener('click', (event) => {
+            const link = event.target.closest('a[href^="#"]');
+            if (!link) return;
 
-      function createParticles() {
-        W = canvasBg.clientWidth * deviceRatio;
-        H = canvasBg.clientHeight * deviceRatio;
-        canvasBg.width = W;
-        canvasBg.height = H;
-        const count = Math.max(20, Math.floor((canvasBg.clientWidth || window.innerWidth) / 30));
-        particles = [];
-        for (let i = 0; i < count; i++) {
-          particles.push({
-            x: Math.random() * W,
-            y: Math.random() * H,
-            r: (Math.random() * 1.6 + 0.6) * deviceRatio,
-            vx: (Math.random() - 0.5) * 0.6 * deviceRatio,
-            vy: (Math.random() - 0.5) * 0.6 * deviceRatio,
-            a: 0.12 + Math.random() * 0.5
-          });
+            const href = link.getAttribute('href');
+            if (!href || href === '#') return;
+
+            const targetId = href.slice(1);
+            const targetElement = document.getElementById(targetId);
+            if (!targetElement) return;
+
+            event.preventDefault();
+            this.scrollToElement(targetElement);
+        });
+    }
+
+    /**
+     * Scroll suave para elemento
+     */
+    scrollToElement(element) {
+        const rect = element.getBoundingClientRect();
+        const targetPosition = rect.top + window.scrollY - this.state.headerHeight - 20;
+
+        if (this.state.reducedMotion) {
+            window.scrollTo(0, targetPosition);
+        } else {
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
         }
-      }
 
-      function draw() {
-        ctx.clearRect(0, 0, W, H);
-        for (const p of particles) {
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(165,167,214,${Math.max(0, Math.min(1, p.a))})`;
-          ctx.fill();
-          p.x += p.vx;
-          p.y += p.vy;
-          if (p.x < -20) p.x = W + 20;
-          if (p.x > W + 20) p.x = -20;
-          if (p.y < -20) p.y = H + 20;
-          if (p.y > H + 20) p.y = -20;
+        // Fechar menu mobile se estiver aberto
+        if (this.state.isMobileMenuOpen) {
+            this.closeMobileMenu();
         }
-        raf = requestAnimationFrame(draw);
-      }
 
-      createParticles();
-      draw();
-
-      const onResize = debounce(() => {
-        cancelAnimationFrame(raf);
-        createParticles();
-        draw();
-      }, 140);
-
-      window.addEventListener('resize', onResize, { passive: true });
-
-      // cleanup if needed (not strictly necessary for single page)
-    } catch (e) {
-      // console.warn('bg particles failed', e);
+        // Foco acessível
+        element.setAttribute('tabindex', '-1');
+        element.focus({ preventScroll: true });
     }
-  }
 
-  function initVideoParticles() {
-    if (!canvasVideo || !canvasVideo.getContext) return;
-    try {
-      const ctx = canvasVideo.getContext('2d');
-      let W = 0, H = 0, particles = [], raf = null;
-      function create() {
-        W = Math.round(canvasVideo.clientWidth);
-        H = Math.round(canvasVideo.clientHeight);
-        canvasVideo.width = W;
-        canvasVideo.height = H;
-        particles = [];
-        const count = Math.max(12, Math.floor((W * H) / (30000)));
-        for (let i = 0; i < count; i++) {
-          particles.push({
-            x: Math.random() * W,
-            y: Math.random() * H,
-            r: Math.random() * 1.2 + 0.3,
-            vx: (Math.random() - 0.5) * 0.4,
-            vy: (Math.random() - 0.5) * 0.4,
-            a: 0.04 + Math.random() * 0.35
-          });
+    /**
+     * Inicializar animações de scroll
+     */
+    initScrollAnimations() {
+        const fadeElements = document.querySelectorAll('.fade-up');
+        if (!fadeElements.length) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, {
+            threshold: this.config.intersectionThreshold
+        });
+
+        fadeElements.forEach(element => observer.observe(element));
+    }
+
+    /**
+     * Inicializar botão "voltar ao topo"
+     */
+    initBackToTop() {
+        if (!this.elements.backToTop) return;
+
+        this.elements.backToTop.addEventListener('click', () => {
+            this.scrollToTop();
+        });
+
+        // Suporte a teclado
+        this.elements.backToTop.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                this.scrollToTop();
+            }
+        });
+    }
+
+    /**
+     * Scroll para o topo
+     */
+    scrollToTop() {
+        if (this.state.reducedMotion) {
+            window.scrollTo(0, 0);
+        } else {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
-      }
-      function draw() {
-        ctx.clearRect(0, 0, W, H);
-        for (const p of particles) {
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(160,200,200,${p.a})`;
-          ctx.fill();
-          p.x += p.vx;
-          p.y += p.vy;
-          if (p.x < -10) p.x = W + 10;
-          if (p.x > W + 10) p.x = -10;
-          if (p.y < -10) p.y = H + 10;
-          if (p.y > H + 10) p.y = -10;
+
+        // Foco acessível no main
+        if (this.elements.main) {
+            this.elements.main.setAttribute('tabindex', '-1');
+            this.elements.main.focus({ preventScroll: true });
         }
-        raf = requestAnimationFrame(draw);
-      }
-      create();
-      draw();
-      window.addEventListener('resize', debounce(() => {
-        cancelAnimationFrame(raf);
-        create();
-        draw();
-      }, 140), { passive: true });
-    } catch (e) {
-      // console.warn('video particles failed', e);
-    }
-  }
-
-  /* ---------- MOBILE NAV (cria toggle + overlay se não existir) ---------- */
-  let navToggle = $('.nav-toggle');
-  let mobileNav = $('.mobile-nav');
-
-  function createMobileNavIfNeeded() {
-    const headerInner = $('.header-inner');
-    if (!headerInner) return;
-
-    // cria botão toggle se não existir
-    if (!navToggle) {
-      navToggle = document.createElement('button');
-      navToggle.className = 'nav-toggle';
-      navToggle.type = 'button';
-      navToggle.setAttribute('aria-label', 'Abrir menu');
-      navToggle.setAttribute('aria-expanded', 'false');
-      navToggle.innerHTML = `<svg width="22" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="22" height="2" rx="1" fill="currentColor"/><rect y="6" width="22" height="2" rx="1" fill="currentColor"/><rect y="12" width="22" height="2" rx="1" fill="currentColor"/></svg>`;
-      // inserir antes do nav (se existir) ou ao final do headerInner
-      const navEl = $('nav');
-      if (navEl) headerInner.insertBefore(navToggle, navEl);
-      else headerInner.appendChild(navToggle);
     }
 
-    // cria overlay mobileNav se não existir (clona ul)
-    if (!mobileNav) {
-      mobileNav = document.createElement('nav');
-      mobileNav.className = 'mobile-nav';
-      mobileNav.setAttribute('aria-label', 'Menu móvel');
-      mobileNav.setAttribute('id', 'mobile-nav');
+    /**
+     * Inicializar sistema de partículas
+     */
+    initParticles() {
+        if (this.elements.canvasBg) {
+            this.particles.bg = new ParticleSystem(
+                this.elements.canvasBg,
+                this.config.particleCount.bg,
+                'background'
+            );
+        }
 
-      // clona lista do desktop
-      const desktopUl = $('#navList');
-      const clone = desktopUl ? desktopUl.cloneNode(true) : document.createElement('ul');
-      clone.id = 'mobileNavList';
-      mobileNav.appendChild(clone);
-
-      // close btn
-      const closeBtn = document.createElement('button');
-      closeBtn.className = 'close-btn';
-      closeBtn.setAttribute('aria-label', 'Fechar menu');
-      closeBtn.innerHTML = '&times;';
-      mobileNav.appendChild(closeBtn);
-
-      document.body.appendChild(mobileNav);
-
-      // eventos do overlay
-      closeBtn.addEventListener('click', () => {
-        closeMobileNav();
-        navToggle.focus();
-      });
-
-      // click em links fecha
-      mobileNav.addEventListener('click', (ev) => {
-        const a = ev.target.closest && ev.target.closest('a');
-        if (!a) return;
-        document.body.classList.remove('nav-open');
-      });
+        if (this.elements.canvasVideo) {
+            this.particles.video = new ParticleSystem(
+                this.elements.canvasVideo,
+                this.config.particleCount.video,
+                'video'
+            );
+        }
     }
-  }
 
-  function openMobileNav() {
-    document.body.classList.add('nav-open');
-    document.documentElement.style.overflow = 'hidden';
-    if (navToggle) navToggle.setAttribute('aria-expanded', 'true');
-    // foco no primeiro link
-    const firstLink = mobileNav && mobileNav.querySelector('a');
-    if (firstLink) firstLink.focus();
-  }
-  function closeMobileNav() {
-    document.body.classList.remove('nav-open');
-    document.documentElement.style.overflow = '';
-    if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
-  }
-  function toggleMobileNav() {
-    if (document.body.classList.contains('nav-open')) closeMobileNav();
-    else openMobileNav();
-  }
+    /**
+     * Inicializar observers de interseção
+     */
+    initIntersectionObservers() {
+        // Observer para botão "voltar ao topo"
+        if (this.elements.backToTop) {
+            const backToTopObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        this.elements.backToTop.classList.add('visible');
+                    } else {
+                        this.elements.backToTop.classList.remove('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
 
-  /* fechar mobile nav se clicar fora (overlay) */
-  function clickOutsideToClose(e) {
-    if (!document.body.classList.contains('nav-open')) return;
-    if (!mobileNav) return;
-    if (mobileNav.contains(e.target)) return;
-    if (navToggle && navToggle.contains(e.target)) return;
-    closeMobileNav();
-  }
+            backToTopObserver.observe(document.createElement('div')); // Placeholder
+        }
+    }
 
-  /* ---------- inicialização geral ---------- */
-  function init() {
-    if (!header) return;
+    /**
+     * Configurar event listeners
+     */
+    setupEventListeners() {
+        // Scroll com throttle
+        window.addEventListener('scroll', this.throttle(() => {
+            this.handleHeaderScroll();
+            this.handleBackToTopVisibility();
+        }, 100), { passive: true });
 
-    // setup
-    updateHeaderHeight();
-    createMobileNavIfNeeded();
-    initSmoothAnchors();
-    initSmoothAnchors = initSmoothAnchors; // keep linter happy if referenced
-    initBackToTop();
-    initFadeUp();
-    initBgParticles();
-    initVideoParticles();
-    setupActiveSectionObserver();
+        // Resize com debounce
+        window.addEventListener('resize', this.debounce(() => {
+            this.updateHeaderHeight();
+            this.handleResize();
+        }, 150), { passive: true });
 
-    // eventos otimizado
-    window.addEventListener('scroll', throttle(() => {
-      handleHeaderOnScroll();
-    }, 100), { passive: true });
+        // Teclado
+        document.addEventListener('keydown', (e) => {
+            this.handleKeyboard(e);
+        });
 
-    window.addEventListener('resize', debounce(() => {
-      updateHeaderHeight();
-      // se o menu mobile estiver aberto e aumentou largura, fechar
-      if (window.innerWidth > 880 && document.body.classList.contains('nav-open')) {
-        closeMobileNav();
-      }
-    }, 150), { passive: true });
+        // Clique fora do menu mobile
+        document.addEventListener('click', (e) => {
+            this.handleClickOutside(e);
+        });
+    }
 
-    // delegation: close mobile if click outside
-    document.addEventListener('click', clickOutsideToClose, { passive: true });
+    /**
+     * Manipular visibilidade do botão "voltar ao topo"
+     */
+    handleBackToTopVisibility() {
+        if (!this.elements.backToTop) return;
 
-    // keyboard: ESC fecha mobile nav; Home tecla leva ao topo
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
-        closeMobileNav();
-        if (navToggle) navToggle.focus();
-      }
-      if (e.key === 'Home') {
-        if (isReducedMotion) window.scrollTo(0, 0);
-        else window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+        if (this.state.scrollY > this.config.scrollThreshold) {
+            this.elements.backToTop.classList.add('visible');
+        } else {
+            this.elements.backToTop.classList.remove('visible');
+        }
+    }
+
+    /**
+     * Manipular resize da janela
+     */
+    handleResize() {
+        // Fechar menu mobile em telas maiores
+        if (window.innerWidth > 768 && this.state.isMobileMenuOpen) {
+            this.closeMobileMenu();
+        }
+
+        // Redesenhar partículas
+        if (this.particles.bg) this.particles.bg.handleResize();
+        if (this.particles.video) this.particles.video.handleResize();
+    }
+
+    /**
+     * Manipular eventos de teclado
+     */
+    handleKeyboard(event) {
+        // ESC fecha menu mobile
+        if (event.key === 'Escape' && this.state.isMobileMenuOpen) {
+            this.closeMobileMenu();
+            this.elements.menuToggle.focus();
+        }
+
+        // Home vai para o topo
+        if (event.key === 'Home') {
+            event.preventDefault();
+            this.scrollToTop();
+        }
+    }
+
+    /**
+     * Manipular clique fora do menu
+     */
+    handleClickOutside(event) {
+        if (!this.state.isMobileMenuOpen) return;
+
+        const isClickInsideNav = this.elements.nav.contains(event.target);
+        const isClickOnToggle = this.elements.menuToggle.contains(event.target);
+
+        if (!isClickInsideNav && !isClickOnToggle) {
+            this.closeMobileMenu();
+        }
+    }
+
+    /**
+     * Throttle para performance
+     */
+    throttle(func, limit) {
+        let inThrottle;
+        return function() {
+            const args = arguments;
+            const context = this;
+            if (!inThrottle) {
+                func.apply(context, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
+    }
+
+    /**
+     * Debounce para performance
+     */
+    debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+}
+
+/**
+ * Sistema de Partículas
+ */
+class ParticleSystem {
+    constructor(canvas, particleCount, type = 'background') {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
+        this.particleCount = particleCount;
+        this.type = type;
+        this.particles = [];
+        this.animationId = null;
+        this.deviceRatio = Math.max(1, window.devicePixelRatio || 1);
+
+        // Configurações por tipo
+        this.config = {
+            background: {
+                maxSize: 3,
+                speed: 0.5,
+                color: '165, 167, 214',
+                alphaRange: [0.1, 0.6]
+            },
+            video: {
+                maxSize: 2,
+                speed: 0.3,
+                color: '160, 200, 200',
+                alphaRange: [0.05, 0.4]
+            }
+        }[this.type];
+
+        this.init();
+    }
+
+    /**
+     * Inicializar sistema de partículas
+     */
+    init() {
+        this.setupCanvas();
+        this.createParticles();
+        this.startAnimation();
+
+        // Redimensionar
+        window.addEventListener('resize', this.debounce(() => {
+            this.handleResize();
+        }, 100));
+    }
+
+    /**
+     * Configurar canvas
+     */
+    setupCanvas() {
+        const rect = this.canvas.getBoundingClientRect();
+        this.canvas.width = rect.width * this.deviceRatio;
+        this.canvas.height = rect.height * this.deviceRatio;
+
+        // Aplicar escala para high-DPI displays
+        this.ctx.scale(this.deviceRatio, this.deviceRatio);
+    }
+
+    /**
+     * Criar partículas
+     */
+    createParticles() {
+        this.particles = [];
+        const width = this.canvas.width / this.deviceRatio;
+        const height = this.canvas.height / this.deviceRatio;
+
+        for (let i = 0; i < this.particleCount; i++) {
+            this.particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                size: Math.random() * this.config.maxSize + 0.5,
+                speedX: (Math.random() - 0.5) * this.config.speed,
+                speedY: (Math.random() - 0.5) * this.config.speed,
+                alpha: Math.random() * (this.config.alphaRange[1] - this.config.alphaRange[0]) + this.config.alphaRange[0]
+            });
+        }
+    }
+
+    /**
+     * Iniciar animação
+     */
+    startAnimation() {
+        const animate = () => {
+            this.ctx.clearRect(0, 0, this.canvas.width / this.deviceRatio, this.canvas.height / this.deviceRatio);
+            
+            this.particles.forEach(particle => {
+                this.updateParticle(particle);
+                this.drawParticle(particle);
+            });
+
+            this.animationId = requestAnimationFrame(animate);
+        };
+
+        animate();
+    }
+
+    /**
+     * Atualizar partícula
+     */
+    updateParticle(particle) {
+        particle.x += particle.speedX;
+        particle.y += particle.speedY;
+
+        // Limites com wrap-around
+        const width = this.canvas.width / this.deviceRatio;
+        const height = this.canvas.height / this.deviceRatio;
+
+        if (particle.x < -20) particle.x = width + 20;
+        if (particle.x > width + 20) particle.x = -20;
+        if (particle.y < -20) particle.y = height + 20;
+        if (particle.y > height + 20) particle.y = -20;
+    }
+
+    /**
+     * Desenhar partícula
+     */
+    drawParticle(particle) {
+        this.ctx.beginPath();
+        this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        this.ctx.fillStyle = `rgba(${this.config.color}, ${particle.alpha})`;
+        this.ctx.fill();
+    }
+
+    /**
+     * Manipular redimensionamento
+     */
+    handleResize() {
+        if (this.animationId) {
+            cancelAnimationFrame(this.animationId);
+        }
+
+        this.setupCanvas();
+        this.createParticles();
+        this.startAnimation();
+    }
+
+    /**
+     * Debounce para performance
+     */
+    debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    /**
+     * Destruir instância
+     */
+    destroy() {
+        if (this.animationId) {
+            cancelAnimationFrame(this.animationId);
+        }
+    }
+}
+
+/**
+ * Inicialização quando DOM estiver pronto
+ */
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        new SecurityInfoWebsite();
     });
+} else {
+    new SecurityInfoWebsite();
+}
 
-    // navToggle events
-    if (navToggle) {
-      navToggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        toggleMobileNav();
-      });
-    }
-
-    // assegura que backToTop esteja acessível via teclado
-    if (backToTopBtn) backToTopBtn.setAttribute('aria-label', backToTopBtn.getAttribute('title') || 'Voltar ao topo');
-
-    // ativa estado inicial de active link (fallback)
-    handleHeaderOnScroll();
-
-    // safe init de funções externas (ex.: particles libs)
-    if (typeof initParticles === 'function') {
-      try { initParticles(); } catch (e) { /* ignore */ }
-    }
-
-    // log opcional
-    // console.log('script.js inicializado');
-  }
-
-  /* ---------- pequenas ligações: smooth anchors (separado porque usado dentro) ---------- */
-  function initSmoothAnchors() {
-    // já implementado acima? usamos delegation aqui
-    document.addEventListener('click', function (ev) {
-      const a = ev.target.closest && ev.target.closest('a[href^="#"]');
-      if (!a) return;
-      const href = a.getAttribute('href');
-      if (!href || href === '#') return;
-      const id = href.slice(1);
-      const target = document.getElementById(id);
-      if (!target) return;
-      ev.preventDefault();
-      const rect = target.getBoundingClientRect();
-      const top = Math.max(0, rect.top + window.scrollY - headerHeight - 8);
-      if (isReducedMotion) window.scrollTo(0, top);
-      else window.scrollTo({ top, behavior: 'smooth' });
-      // close mobile nav if open
-      if (document.body.classList.contains('nav-open')) closeMobileNav();
-      // focus target for a11y
-      target.setAttribute('tabindex', '-1');
-      target.focus({ preventScroll: true });
-    });
-  }
-
-  // inicializa quando DOM pronto
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-
-})();
+// Export para uso em módulos (opcional)
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { SecurityInfoWebsite, ParticleSystem };
+}
