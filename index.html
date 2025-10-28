@@ -1,266 +1,184 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Especialista de Segurança da Informação | Feira de Profissões</title>
-
-  <!-- Meta Tags Otimizadas -->
-  <meta name="description" content="Descubra a carreira de Especialista em Segurança da Informação: proteção de dados, sistemas digitais e privacidade. Guia completo sobre a profissão." />
-  <meta name="keywords" content="segurança da informação, cibersegurança, proteção de dados, carreira TI, segurança digital" />
-  <meta name="author" content="Seu Nome" />
-  <meta name="robots" content="index, follow" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Especialista de Segurança da Informação" />
-  <meta property="og:description" content="Descubra como proteger dados e sistemas digitais contra ameaças cibernéticas" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://seudominio.com" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Especialista de Segurança da Informação</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 
   <!-- Favicon -->
-  <link rel="icon" href="imagens/favicon/favicon.ico" type="image/x-icon" />
-  <link rel="apple-touch-icon" href="imagens/favicon/apple-touch-icon.png">
+  <link rel="icon" href="imagens/favicon/favicon.ico" type="image/x-icon">
 </head>
-
 <body>
-  <!-- HEADER MELHORADO -->
-  <header role="banner">
-    <div class="container header-inner">
+
+  <!-- Canvas para animação de partículas de fundo 
+       - Usado apenas para efeito visual 
+       - Preenchido e animado via JavaScript 
+       - Ignorado por leitores de tela -->
+  <canvas id="backgroundParticles" aria-hidden="true"></canvas>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner container">
       <div class="logo">
-        <a href="index.html" aria-label="Página inicial - Especialista de Segurança da Informação">
-          <img src="imagens/index/logo.png" alt="Logo - Segurança da Informação" width="60" height="60" loading="eager" />
+        <a href="index.html" aria-label="Ir para a página inicial">
+          <img src="imagens/index/logo.png" alt="Logotipo - Especialista de Segurança da Informação" />
         </a>
         <h1>Especialista de Segurança da Informação</h1>
       </div>
 
-      <!-- Menu hambúrguer acessível -->
-      <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="main-nav">
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-      </button>
-
-      <!-- Navegação semântica -->
-      <nav id="main-nav" role="navigation" aria-label="Navegação principal">
-        <ul>
-          <li><a href="conceitos-fundamentos.html" class="nav-link">Conceitos & Fundamentos</a></li>
-          <li><a href="carreira.html" class="nav-link">Carreira & Áreas</a></li>
-          <li><a href="normas-processos.html" class="nav-link">Normas & Mercado</a></li>
+      <!-- Navegação principal -->
+      <nav id="main-nav" role="navigation" aria-label="Menu principal">
+        <ul id="navList">
+          <!-- Home removido conforme pedido -->
+          <li><a href="conteudo/conceitos_&_fundamentos.html">Conceitos & Fundamentos</a></li>
+          <li><a href="conteudo/areas_de_atuacao.html">Áreas de Atuação</a></li>
+          <li><a href="conteudo/habilidades_&_formacao.html">Habilidades & Formação</a></li>
+          <li><a href="conteudo/normas_&_leis.html">Normas, Leis & Mercado</a></li>
+          <li><a href="conteudo/processos_&_entregaveis.html">Processos & Entregáveis</a></li>
+          <li><a href="conteudo/riscos_&_desafios.html">Riscos, Desafios & Tendências</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- CONTEÚDO PRINCIPAL -->
-  <main id="main-content" role="main">
-    
-    <!-- SEÇÃO HERO/INTRODUÇÃO -->
+  <!-- MAIN -->
+  <main id="main-content">
+    <!-- INTRODUÇÃO -->
     <section id="intro" class="fade-up" aria-labelledby="intro-title">
       <div class="container intro-container">
         <div class="intro-text">
           <h1 id="intro-title">O que é um Especialista de Segurança da Informação?</h1>
-          <p class="intro-lead">
-            É o <strong>guarda-costas digital</strong> que protege dados, sistemas e redes contra ameaças cibernéticas. 
-            Garante que informações sensíveis fiquem seguras e acessíveis apenas para pessoas autorizadas.
+          <p>
+            Um Especialista de Segurança da Informação é o profissional responsável por proteger dados, sistemas e redes contra ameaças digitais. 
+            Ele garante que as informações sejam mantidas seguras, confiáveis e disponíveis para quem precisa, aplicando princípios de confidencialidade, 
+            integridade e disponibilidade.
           </p>
-          <div class="intro-details">
-            <p>
-              Este profissional identifica <strong>vulnerabilidades</strong>, implementa <strong>sistemas de defesa</strong> 
-              e monitora <strong>riscos em tempo real</strong>. Atua na linha de frente contra vírus, invasões, fraudes 
-              e outros crimes digitais.
-            </p>
-            <p>
-              Além da parte técnica, orienta usuários sobre <strong>boas práticas de segurança</strong>, como criação de 
-              senhas fortes, identificação de links suspeitos e proteção de dados pessoais.
-            </p>
-            <p>
-              Em um mundo cada vez mais conectado, sua função é <strong>essencial</strong> para preservar a privacidade, 
-              evitar prejuízos financeiros e manter a confiança no ambiente digital.
-            </p>
-          </div>
+          <p>
+            Esse especialista atua em diferentes frentes: previne ataques cibernéticos, monitora sistemas, detecta vulnerabilidades e responde rapidamente 
+            a incidentes de segurança. Além disso, cria políticas, procedimentos e boas práticas que ajudam empresas e organizações a reduzir riscos e 
+            manter a confiança de clientes e parceiros.
+          </p>
+          <p>
+            Em um mundo cada vez mais conectado, onde dados digitais são valiosos, o papel desse profissional se torna essencial para proteger 
+            informações estratégicas, financeiras e pessoais, garantindo a continuidade das operações e a segurança de todos os envolvidos.
+          </p>
         </div>
+      </div>
 
-        <!-- VÍDEO OTIMIZADO -->
-        <div class="video-wrapper" role="region" aria-labelledby="video-title">
-          <div class="video-header">
-            <h2 id="video-title" class="visually-hidden">Vídeo explicativo sobre a profissão</h2>
-            <p class="video-caption">Entenda na prática o dia a dia do profissional</p>
-          </div>
-          <div class="iframe-container">
-            <iframe
-              src="https://www.youtube.com/embed/mBZBPptSneM?si=sHNbe56fVBtZkHfa"
-              title="Vídeo: Especialista em Segurança da Informação - Carreira e Atuação"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-              loading="lazy"
-            ></iframe>
-          </div>
+      <!-- VÍDEO + Canvas de partículas -->
+      <div class="video-wrapper" role="region" aria-label="Apresentação em vídeo sobre a profissão">
+        <!-- Canvas de partículas em background -->
+        <canvas id="particles" aria-hidden="true" class="video-canvas"></canvas>
+
+        <!-- Vídeo responsivo -->
+        <div class="iframe-container">
+          <iframe 
+            src="https://www.youtube.com/embed/mBZBPptSneM?si=sHNbe56fVBtZkHfa" 
+            title="YouTube video player — Especialista de Segurança da Informação" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen 
+            loading="lazy">
+          </iframe>
         </div>
       </div>
     </section>
 
-    <!-- SEÇÃO PILARES -->
+    <!-- PILARES DA PROFISSÃO -->
     <section id="pilares" class="fade-up" aria-labelledby="pilares-title">
       <div class="container">
-        <header class="section-header">
-          <h2 id="pilares-title" class="section-title">Os 3 Pilares da Segurança da Informação</h2>
-          <p class="section-subtitle">Princípios fundamentais que guiam toda a profissão</p>
-        </header>
-        
+        <h2 id="pilares-title" class="section-title">Pilares da Profissão</h2>
+
         <div class="icons-section" role="list">
-          <article class="icon-card" role="listitem">
-            <div class="icon-wrapper">
-              <img src="imagens/index/confidencialidade.png" alt="Ícone de Confidencialidade - Cadeado representando proteção" width="80" height="80" loading="lazy" />
-            </div>
-            <h3>Confidencialidade</h3>
-            <p>Garante que informações sensíveis sejam acessadas <strong>apenas por pessoas autorizadas</strong>. Exemplos: senhas, dados financeiros, documentos corporativos.</p>
+          <article class="icon-card" role="listitem" aria-labelledby="pillar1">
+            <img src="imagens/index/protecao de dados.png" alt="Ícone representando proteção de dados" loading="lazy">
+            <h3 id="pillar1">Proteção de Dados</h3>
+            <p>Garantir que informações confidenciais e sensíveis estejam protegidas contra acessos não autorizados e vazamentos.</p>
           </article>
 
-          <article class="icon-card" role="listitem">
-            <div class="icon-wrapper">
-              <img src="imagens/index/integridade.png" alt="Ícone de Integridade - Escudo representando proteção contra alterações" width="80" height="80" loading="lazy" />
-            </div>
-            <h3>Integridade</h3>
-            <p>Assegura que os dados permaneçam <strong>precisos e completos</strong>, sem alterações não autorizadas. Previne manipulação e corrompimento de informações.</p>
+          <article class="icon-card" role="listitem" aria-labelledby="pillar2">
+            <img src="imagens/index/redes de sistemas.png" alt="Ícone representando redes e sistemas" loading="lazy">
+            <h3 id="pillar2">Redes e Sistemas</h3>
+            <p>Monitorar, administrar e proteger redes corporativas, servidores e sistemas, prevenindo ataques e falhas operacionais.</p>
           </article>
 
-          <article class="icon-card" role="listitem">
-            <div class="icon-wrapper">
-              <img src="imagens/index/disponibilidade.png" alt="Ícone de Disponibilidade - Relógio representando acesso constante" width="80" height="80" loading="lazy" />
-            </div>
-            <h3>Disponibilidade</h3>
-            <p>Garante que sistemas e dados estejam <strong>sempre acessíveis</strong> quando necessário, mesmo durante ataques ou falhas técnicas.</p>
+          <article class="icon-card" role="listitem" aria-labelledby="pillar3">
+            <img src="imagens/index/educação e treinamento.png" alt="Ícone representando educação e treinamento" loading="lazy">
+            <h3 id="pillar3">Educação e Treinamento</h3>
+            <p>Capacitar equipes e usuários sobre boas práticas de segurança, políticas internas e prevenção de incidentes.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- SEÇÃO CARREIRA -->
+    <!-- EXPLORANDO A CARREIRA -->
     <section id="carreira" class="fade-up" aria-labelledby="carreira-title">
       <div class="container">
-        <header class="section-header">
-          <h2 id="carreira-title" class="section-title">Explorando a Carreira</h2>
-          <p class="section-subtitle">Descubra os caminhos e oportunidades da profissão</p>
-        </header>
-        
+        <h2 id="carreira-title" class="section-title">Explorando a Carreira</h2>
+
         <div class="overview-cards" role="list">
-          <article class="overview-card" role="listitem">
-            <div class="card-icon">
-              <img src="imagens/index/icone-habilidades.png" alt="Ícone de Habilidades e Formação - Capelo e ferramentas" width="70" height="70" loading="lazy" />
-            </div>
-            <div class="card-content">
-              <h3>Habilidades & Formação</h3>
-              <p>Conheça as competências técnicas e comportamentais essenciais, caminhos de aprendizado, certificações valorizadas e ferramentas do dia a dia.</p>
-              <a class="btn btn-primary" href="carreira.html#habilidades" aria-label="Saiba mais sobre Habilidades e Formação">
-                Explorar
-              </a>
-            </div>
+          <!-- cards... (mantive seu conteúdo) -->
+          <article class="overview-card" role="listitem" aria-labelledby="c-hab">
+            <img src="imagens/index/Ícone de habilidades e formação.png" alt="Ícone de habilidades e formação" loading="lazy">
+            <h3 id="c-hab">Habilidades & Formação</h3>
+            <p>Descubra as competências essenciais e os caminhos de aprendizado para se tornar um especialista em segurança da informação. Inclui técnicas, ferramentas e certificações mais relevantes para o mercado.</p>
+            <a class="btn" href="conteudo/habilidades_&_formacao.html">Saiba mais</a>
           </article>
 
-          <article class="overview-card" role="listitem">
-            <div class="card-icon">
-              <img src="imagens/index/icone-areas.png" alt="Ícone de Áreas de Atuação - Mapa de oportunidades" width="70" height="70" loading="lazy" />
-            </div>
-            <div class="card-content">
-              <h3>Áreas de Atuação</h3>
-              <p>Descubra campos especializados como Pentest, Forense Digital, SOC, Cloud Security e GRC. Entenda as responsabilidades de cada área.</p>
-              <a class="btn btn-primary" href="carreira.html#areas" aria-label="Saiba mais sobre Áreas de Atuação">
-                Explorar
-              </a>
-            </div>
+          <!-- ...outros cards mantidos -->
+          <article class="overview-card" role="listitem" aria-labelledby="c-conc">
+            <img src="imagens/index/Ícone de conceitos e fundamentos.png" alt="Ícone de conceitos e fundamentos" loading="lazy">
+            <h3 id="c-conc">Conceitos & Fundamentos</h3>
+            <p>Aprenda os princípios que sustentam toda a segurança da informação, como a tríade CIA (Confidencialidade, Integridade e Disponibilidade), tipos de riscos e ameaças, e boas práticas essenciais para proteger dados e sistemas.</p>
+            <a class="btn" href="conteudo/conceitos_&_fundamentos.html">Saiba mais</a>
           </article>
 
-          <article class="overview-card" role="listitem">
-            <div class="card-icon">
-              <img src="imagens/index/icone-normas.png" alt="Ícone de Normas e Mercado - Documentos e gráficos" width="70" height="70" loading="lazy" />
-            </div>
-            <div class="card-content">
-              <h3>Normas & Mercado</h3>
-              <p>Conheça LGPD, ISO 27001, mercado de trabalho, faixas salariais e tendências. Entenda o contexto regulatório e oportunidades.</p>
-              <a class="btn btn-primary" href="normas-processos.html" aria-label="Saiba mais sobre Normas e Mercado">
-                Explorar
-              </a>
-            </div>
+          <article class="overview-card" role="listitem" aria-labelledby="c-areas">
+            <img src="imagens/index/Ícone de áreas de atuação.png" alt="Ícone de áreas de atuação" loading="lazy">
+            <h3 id="c-areas">Áreas de Atuação</h3>
+            <p>Explore os diversos campos em que um especialista de segurança da informação pode atuar, como SOC, Pentest, Forense Digital, Cloud Security e GRC. Entenda os papéis e responsabilidades de cada área.</p>
+            <a class="btn" href="conteudo/areas_de_atuacao.html">Saiba mais</a>
           </article>
+
+          <article class="overview-card" role="listitem" aria-labelledby="c-normas">
+            <img src="imagens/index/Ícone de normas e leis.png" alt="Ícone de normas e leis" loading="lazy">
+            <h3 id="c-normas">Normas, Leis & Mercado</h3>
+            <p>Conheça as regulamentações e padrões que guiam a profissão, como LGPD e ISO 27001. Além disso, veja o panorama do mercado brasileiro e global, incluindo demanda por profissionais e oportunidades de crescimento.</p>
+            <a class="btn" href="conteudo/normas_&_leis.html">Saiba mais</a>
+          </article>
+
+          <article class="overview-card" role="listitem" aria-labelledby="c-processos">
+            <img src="imagens/index/Ícone de processos e entregáveis.png" alt="Ícone de processos e entregáveis" loading="lazy">
+            <h3 id="c-processos">Processos & Entregáveis</h3>
+            <p>Descubra o que um especialista produz no dia a dia: políticas, playbooks, relatórios e métricas que mantêm os sistemas e dados corporativos protegidos. Veja como cada tarefa contribui para a segurança global da organização.</p>
+            <a class="btn" href="conteudo/processos_&_entregaveis.html">Saiba mais</a>
+          </article>
+
+          <article class="overview-card" role="listitem" aria-labelledby="c-riscos">
+            <img src="imagens/index/Ícone de riscos, desafios e tendências.png" alt="Ícone de riscos, desafios e tendências" loading="lazy">
+            <h3 id="c-riscos">Riscos, Desafios & Tendências</h3>
+            <p>Entenda os principais riscos e dilemas éticos da profissão, bem como as tendências emergentes que moldam o futuro da cibersegurança, incluindo Inteligência Artificial, Zero Trust e escassez de profissionais especializados.</p>
+            <a class="btn" href="conteudo/riscos_&_desafios.html">Saiba mais</a>
+          </article>
+
         </div>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER MELHORADO -->
-  <footer role="contentinfo">
+  <!-- FOOTER -->
+  <footer>
     <div class="container">
-      <div class="footer-content">
-        <p>&copy; 2025 Especialista em Segurança da Informação. Desenvolvido para Feira de Profissões.</p>
-        <p class="footer-small">Todos os direitos reservados. | 
-          <a href="politica-privacidade.html" style="color: #A5A7D6;">Política de Privacidade</a>
-        </p>
-      </div>
+      <p>&copy; 2025 Especialista em Segurança da Informação. Todos os direitos reservados.</p>
     </div>
   </footer>
 
-  <!-- BOTÃO VOLTAR AO TOPO ACESSÍVEL -->
-  <button id="backToTop" class="back-to-top" title="Voltar ao topo da página" aria-label="Voltar ao topo">
-    <span aria-hidden="true">↑</span>
-  </button>
+  <!-- Botão voltar ao topo -->
+  <button id="backToTop" class="hidden" title="Voltar ao topo" aria-label="Voltar ao topo">↑</button>
 
-  <!-- SCRIPT OTIMIZADO -->
-  <script>
-    // Menu Responsivo Melhorado
-    const menuToggle = document.getElementById("menu-toggle");
-    const mainNav = document.getElementById("main-nav");
-
-    if (menuToggle && mainNav) {
-      menuToggle.addEventListener("click", () => {
-        const isExpanded = mainNav.classList.toggle("active");
-        menuToggle.setAttribute("aria-expanded", isExpanded);
-        menuToggle.classList.toggle("active");
-      });
-
-      // Fechar menu ao clicar em um link
-      document.querySelectorAll('#main-nav a').forEach(link => {
-        link.addEventListener('click', () => {
-          mainNav.classList.remove('active');
-          menuToggle.setAttribute('aria-expanded', 'false');
-          menuToggle.classList.remove('active');
-        });
-      });
-    }
-
-    // Botão voltar ao topo suavizado
-    const backToTop = document.getElementById("backToTop");
-    if (backToTop) {
-      window.addEventListener("scroll", () => {
-        const scrollY = window.scrollY;
-        backToTop.classList.toggle("visible", scrollY > 300);
-      });
-
-      backToTop.addEventListener("click", () => {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
-      });
-    }
-
-    // Animações de entrada
-    document.addEventListener('DOMContentLoaded', () => {
-      const fadeElements = document.querySelectorAll('.fade-up');
-      
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
-          }
-        });
-      }, { threshold: 0.1 });
-
-      fadeElements.forEach(el => observer.observe(el));
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
