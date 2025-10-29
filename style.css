@@ -1088,3 +1088,16 @@ body.dark-mode .example-box {
     font-size: 1.3rem;
   }
 }
+
+/* Garantir que imagens sempre apareçam */
+img[loading="lazy"] {
+  opacity: 1 !important;
+  transition: opacity 0.5s ease !important;
+}
+
+/* Forçar visibilidade nas imagens dos cards */
+.icon-card img,
+.overview-card img {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
