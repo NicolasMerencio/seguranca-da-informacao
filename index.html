@@ -6,6 +6,15 @@
   <title>Especialista de Segurança da Informação</title>
   <meta name="description" content="Saiba o que faz um Especialista de Segurança da Informação, seus pilares, formação, áreas de atuação e boas práticas para proteger dados.">
 
+  <!-- Meta tags SEO e Redes Sociais -->
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Especialista de Segurança da Informação">
+  <meta property="og:description" content="Conheça a profissão que protege dados e sistemas contra ameaças digitais">
+  <meta property="og:image" content="imagens/index/logo.png">
+  <meta property="og:url" content="https://seudominio.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://seudominio.com">
+
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 
@@ -13,11 +22,6 @@
   <link rel="icon" href="imagens/favicon/favicon.ico" type="image/x-icon">
 </head>
 <body>
-
-  <!-- Pré-loader -->
-  <div id="preloader" aria-hidden="true">
-    <p>Carregando...</p>
-  </div>
 
   <!-- Canvas de partículas de fundo -->
   <canvas id="backgroundParticles" aria-hidden="true"></canvas>
@@ -27,31 +31,44 @@
     <div class="header-inner container">
       <div class="logo">
         <a href="index.html" aria-label="Ir para a página inicial">
-          <img src="imagens/index/logo.png" alt="Logotipo - Especialista de Segurança da Informação" width="120" height="120"/>
+          <img src="imagens/index/logo.png" alt="Logotipo - Especialista de Segurança da Informação" width="120" height="120" loading="lazy"/>
         </a>
-        <h1>Especialista de Segurança da Informação</h1>
+        <h1 data-text-key="site-title">Especialista de Segurança da Informação</h1>
       </div>
 
       <!-- Navegação principal -->
       <nav id="main-nav" role="navigation" aria-label="Menu principal">
         <ul id="navList">
-          <li><a href="formacao.html">Formação e Habilidades</a></li>
-          <li><a href="areas.html">Áreas de Atuação</a></li>
-          <li><a href="leis.html">Leis e Proteção de Dados</a></li>
+          <li><a href="formacao.html" data-text-key="nav-formacao">Formação e Habilidades</a></li>
+          <li><a href="areas.html" data-text-key="nav-areas">Áreas de Atuação</a></li>
+          <li><a href="leis.html" data-text-key="nav-leis">Leis e Proteção de Dados</a></li>
         </ul>
       </nav>
 
       <!-- Controles adicionais -->
       <div class="header-controls">
         <!-- Botão modo noturno -->
-        <button id="toggleDarkMode" aria-label="Ativar/Desativar modo escuro">🌙</button>
+        <button id="darkModeToggle" aria-label="Ativar/Desativar modo escuro">🌙</button>
 
         <!-- Seletor de idioma -->
-        <select id="languageSwitcher" aria-label="Selecionar idioma">
+        <select id="langToggle" aria-label="Selecionar idioma">
           <option value="pt" selected>Português</option>
           <option value="en">English</option>
         </select>
+
+        <!-- Botão hamburger mobile -->
+        <button class="nav-toggle" aria-label="Abrir menu mobile">☰</button>
       </div>
+    </div>
+
+    <!-- Menu mobile -->
+    <div class="mobile-nav" aria-hidden="true">
+      <button class="close-btn" aria-label="Fechar menu">×</button>
+      <ul>
+        <li><a href="formacao.html" data-text-key="nav-formacao">Formação e Habilidades</a></li>
+        <li><a href="areas.html" data-text-key="nav-areas">Áreas de Atuação</a></li>
+        <li><a href="leis.html" data-text-key="nav-leis">Leis e Proteção de Dados</a></li>
+      </ul>
     </div>
   </header>
 
@@ -62,21 +79,25 @@
     <section id="intro" class="fade-up" role="region" aria-labelledby="intro-title">
       <div class="container intro-container">
         <div class="intro-text">
-          <h1 id="intro-title">O que é um Especialista de Segurança da Informação?</h1>
+          <h1 id="intro-title" data-text-key="intro-title">O que é um Especialista de Segurança da Informação?</h1>
           <p data-text-key="intro-paragraph1">Um especialista em segurança da informação é, basicamente, o profissional que protege os dados e os sistemas de uma empresa contra ameaças digitais — como vírus, invasões e golpes virtuais. Ele funciona como um guarda-costas digital, garantindo que as informações importantes fiquem seguras e só possam ser acessadas por quem tem permissão.</p>
           <p data-text-key="intro-paragraph2">Esse profissional identifica pontos fracos nos sistemas, cria barreiras de proteção — como senhas seguras, antivírus e criptografia — e monitora tudo o tempo todo para detectar qualquer atividade estranha. Além disso, ele também ensina os usuários a se protegerem, mostrando a importância de não clicar em links suspeitos ou compartilhar senhas.</p>
           <p data-text-key="intro-paragraph3">Hoje em dia, com a tecnologia presente em quase tudo que fazemos, esse trabalho é essencial. Graças a esse especialista, conseguimos manter a privacidade, evitar prejuízos e garantir mais confiança no mundo digital — tanto para empresas quanto para pessoas comuns.</p>
         </div>
       </div>
 
-      <!-- VÍDEO + Canvas de partículas -->
+      <!-- VÍDEO + Canvas de partículas - CORRIGIDO -->
       <div class="video-wrapper" role="region" aria-label="Apresentação em vídeo sobre a profissão">
         <canvas id="particles" aria-hidden="true" class="video-canvas"></canvas>
         <div class="iframe-container">
-          <video src="animacao/Operacao Firewall.mp4" autoplay muted loop controls poster="imagens/index/video-poster.png" playsinline preload="auto">
-            <track kind="captions" srclang="pt" src="legendas.vtt" default>
+          <!-- CORREÇÃO: Poster corrigido e estrutura otimizada -->
+          <video controls playsinline preload="metadata" 
+                 poster="imagens/index/poster.jpg"
+                 aria-label="Vídeo explicativo sobre a profissão de segurança da informação">
+            <source src="animação/Operação Firewall.mp4" type="video/mp4">
+            <source src="animacao/operacao-firewall.webm" type="video/webm">
+            Seu navegador não suporta o elemento de vídeo.
           </video>
-          <button id="videoMute" aria-label="Ativar/desativar som do vídeo">🔈</button>
         </div>
       </div>
     </section>
@@ -87,19 +108,19 @@
         <h2 id="pilares-title" class="section-title" data-text-key="pillars-title">Os 3 Pilares da Segurança da Informação</h2>
         <div class="icons-section" role="list">
           <article class="icon-card" role="listitem" aria-labelledby="pillar1">
-            <img src="imagens/index/protecao-de-dados.png" alt="Confidencialidade" loading="lazy" width="100" height="100">
+            <img src="imagens/index/Confidencialidade.png" alt="Confidencialidade - Proteção de dados confidenciais" loading="lazy" width="100" height="100">
             <h3 id="pillar1" data-text-key="pillar1-title">Confidencialidade</h3>
             <p data-text-key="pillar1-text">Garante que as informações sejam acessadas somente por pessoas autorizadas. Exemplo: manter senhas seguras e evitar que dados pessoais vazem.</p>
           </article>
 
           <article class="icon-card" role="listitem" aria-labelledby="pillar2">
-            <img src="imagens/index/redes.png" alt="Integridade" loading="lazy" width="100" height="100">
+            <img src="imagens/index/Integridade.png" alt="Integridade - Garantia da precisão dos dados" loading="lazy" width="100" height="100">
             <h3 id="pillar2" data-text-key="pillar2-title">Integridade</h3>
             <p data-text-key="pillar2-text">Assegura que os dados não sejam alterados ou corrompidos sem permissão. Exemplo: garantir que um documento ou um sistema continue igual ao original, sem modificações indevidas.</p>
           </article>
 
           <article class="icon-card" role="listitem" aria-labelledby="pillar3">
-            <img src="imagens/index/treinamento.png" alt="Disponibilidade" loading="lazy" width="100" height="100">
+            <img src="imagens/index/Disponibilidade.png" alt="Disponibilidade - Acesso contínuo aos sistemas" loading="lazy" width="100" height="100">
             <h3 id="pillar3" data-text-key="pillar3-title">Disponibilidade</h3>
             <p data-text-key="pillar3-text">Garante que as informações e sistemas estejam sempre acessíveis quando forem necessários. Exemplo: evitar que um site ou sistema saia do ar por falhas ou ataques.</p>
           </article>
@@ -111,30 +132,30 @@
     <section id="carreira" class="fade-up" role="region" aria-labelledby="carreira-title">
       <div class="container">
         <h2 id="carreira-title" class="section-title" data-text-key="career-title">Explorando a Carreira</h2>
-        <div class="cards-section" role="list">
+        <div class="overview-cards" role="list">
 
           <!-- Card 1: Formação e Habilidades -->
-          <article class="icon-card" role="listitem" aria-labelledby="card-formacao">
-            <img src="imagens/index/formacao.png" alt="Formação e Habilidades" loading="lazy" width="100" height="100">
+          <article class="overview-card" role="listitem" aria-labelledby="card-formacao">
+            <img src="imagens/index/Ícone de habilidades e formação.png" alt="Formação e Habilidades - Capelo e ferramentas" loading="lazy" width="100" height="100">
             <h3 id="card-formacao" data-text-key="card-formacao-title">Formação e Habilidades</h3>
             <p data-text-key="card-formacao-text">Um especialista precisa de conhecimento técnico, habilidades práticas, competências comportamentais e entendimento das leis de proteção de dados.</p>
-            <a href="formacao.html" class="btn-saiba-mais" aria-label="Saiba mais sobre Formação e Habilidades" data-text-key="card-formacao-btn">Saiba Mais</a>
+            <a href="formacao.html" class="btn" aria-label="Saiba mais sobre Formação e Habilidades" data-text-key="card-formacao-btn">Saiba Mais</a>
           </article>
 
           <!-- Card 2: Áreas de Atuação -->
-          <article class="icon-card" role="listitem" aria-labelledby="card-areas">
-            <img src="imagens/index/areas.png" alt="Áreas de Atuação e Mercado de Trabalho" loading="lazy" width="100" height="100">
+          <article class="overview-card" role="listitem" aria-labelledby="card-areas">
+            <img src="imagens/index/Ícone de áreas de atuação.png" alt="Áreas de Atuação - Mapa com localizações" loading="lazy" width="100" height="100">
             <h3 id="card-areas" data-text-key="card-areas-title">Áreas de Atuação</h3>
             <p data-text-key="card-areas-text">O especialista pode trabalhar em empresas de tecnologia, bancos, hospitais, órgãos públicos, startups e consultorias. Há alta demanda e vagas remotas.</p>
-            <a href="areas.html" class="btn-saiba-mais" aria-label="Saiba mais sobre Áreas de Atuação" data-text-key="card-areas-btn">Saiba Mais</a>
+            <a href="areas.html" class="btn" aria-label="Saiba mais sobre Áreas de Atuação" data-text-key="card-areas-btn">Saiba Mais</a>
           </article>
 
           <!-- Card 3: Leis e Proteção de Dados -->
-          <article class="icon-card" role="listitem" aria-labelledby="card-leis">
-            <img src="imagens/index/leis.png" alt="Leis, Criptografia e Proteção de Dados" loading="lazy" width="100" height="100">
+          <article class="overview-card" role="listitem" aria-labelledby="card-leis">
+            <img src="imagens/index/Ícone de normas e leis.png" alt="Leis e Proteção de Dados - Livro de leis com escudo" loading="lazy" width="100" height="100">
             <h3 id="card-leis" data-text-key="card-leis-title">Leis e Proteção de Dados</h3>
             <p data-text-key="card-leis-text">Inclui LGPD, criptografia e boas práticas de proteção de dados. Ajuda a manter a privacidade, prevenir prejuízos e garantir confiança no mundo digital.</p>
-            <a href="leis.html" class="btn-saiba-mais" aria-label="Saiba mais sobre Leis e Proteção de Dados" data-text-key="card-leis-btn">Saiba Mais</a>
+            <a href="leis.html" class="btn" aria-label="Saiba mais sobre Leis e Proteção de Dados" data-text-key="card-leis-btn">Saiba Mais</a>
           </article>
 
         </div>
@@ -146,7 +167,7 @@
   <!-- FOOTER -->
   <footer>
     <div class="container">
-      <p>&copy; 2025 Especialista em Segurança da Informação. Todos os direitos reservados.</p>
+      <p data-text-key="footer-text">&copy; 2025 Especialista em Segurança da Informação. Todos os direitos reservados.</p>
     </div>
   </footer>
 

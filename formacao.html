@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formação e Habilidades - Segurança da Informação</title>
+  <meta name="description" content="Conheça a formação acadêmica, certificações, habilidades técnicas e comportamentais necessárias para um especialista em segurança da informação.">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="imagens/favicon/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <canvas id="backgroundParticles" aria-hidden="true"></canvas>
+
+  <header>
+    <div class="header-inner container">
+      <div class="logo">
+        <a href="index.html" aria-label="Ir para a página inicial">
+          <img src="imagens/index/logo.png" alt="Logotipo - Especialista de Segurança da Informação" width="120" height="120"/>
+        </a>
+        <h1 data-text-key="site-title">Especialista de Segurança da Informação</h1>
+      </div>
+
+      <nav id="main-nav" role="navigation" aria-label="Menu principal">
+        <ul id="navList">
+          <li><a href="formacao.html" data-text-key="nav-formacao" class="active">Formação e Habilidades</a></li>
+          <li><a href="areas.html" data-text-key="nav-areas">Áreas de Atuação</a></li>
+          <li><a href="leis.html" data-text-key="nav-leis">Leis e Proteção de Dados</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-controls">
+        <button id="darkModeToggle" aria-label="Ativar/Desativar modo escuro">🌙</button>
+        <select id="langToggle" aria-label="Selecionar idioma">
+          <option value="pt" selected>Português</option>
+          <option value="en">English</option>
+        </select>
+        <button class="nav-toggle" aria-label="Abrir menu mobile">☰</button>
+      </div>
+    </div>
+
+    <div class="mobile-nav" aria-hidden="true">
+      <button class="close-btn" aria-label="Fechar menu">×</button>
+      <ul>
+        <li><a href="formacao.html" data-text-key="nav-formacao" class="active">Formação e Habilidades</a></li>
+        <li><a href="areas.html" data-text-key="nav-areas">Áreas de Atuação</a></li>
+        <li><a href="leis.html" data-text-key="nav-leis">Leis e Proteção de Dados</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- HERÓI -->
+    <section id="intro" class="fade-up">
+      <div class="container">
+        <div class="intro-text">
+          <h1>Formação e Habilidades Necessárias</h1>
+          <p>Um especialista em segurança da informação precisa de conhecimento técnico, habilidades práticas, competências comportamentais e entendimento das leis de proteção de dados. Todos esses elementos juntos formam a base para atuar de forma segura e eficiente.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMAÇÃO ACADÊMICA -->
+    <section id="formacao-academica" class="fade-up content-section">
+      <div class="container">
+        <h2 class="section-title">📚 Formação Acadêmica</h2>
+        <p class="section-description">A base começa com a educação formal, que fornece o entendimento de sistemas e redes:</p>
+        
+        <div class="cards-grid">
+          <div class="content-card">
+            <h3>Ciência da Computação</h3>
+            <p>Programação, lógica, bancos de dados e fundamentos da computação.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>Sistemas de Informação</h3>
+            <p>Análise de sistemas e gestão de TI com foco em negócios.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>Engenharia de Redes</h3>
+            <p>Redes, protocolos e comunicação de dados em infraestrutura.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>Segurança da Informação</h3>
+            <p>Cursos especializados que abordam proteção de dados e criptografia.</p>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <strong>Dica:</strong> Cursos livres e treinamentos específicos em ferramentas de segurança ajudam a complementar a formação.
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICAÇÕES -->
+    <section id="certificacoes" class="fade-up content-section">
+      <div class="container">
+        <h2 class="section-title">🏆 Certificações</h2>
+        <p class="section-description">As certificações são uma forma de comprovar que o profissional tem conhecimento atualizado e prático:</p>
+        
+        <div class="cards-grid">
+          <div class="content-card">
+            <h3>ISO 27001</h3>
+            <p>Gestão de segurança da informação e implementação de SGSI.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>CompTIA Security+</h3>
+            <p>Fundamentos de segurança de TI para profissionais iniciantes.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>CEH</h3>
+            <p>Certified Ethical Hacker - ética e testes de invasão autorizados.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>CISSP</h3>
+            <p>Gestão avançada de segurança e governança de TI para experientes.</p>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <strong>Dica:</strong> Escolher certificações de acordo com a área de interesse ajuda a direcionar a carreira.
+        </div>
+      </div>
+    </section>
+
+    <!-- HABILIDADES TÉCNICAS -->
+    <section id="habilidades-tecnicas" class="fade-up content-section">
+      <div class="container">
+        <h2 class="section-title">💻 Habilidades Técnicas</h2>
+        <p class="section-description">O especialista precisa saber usar ferramentas e técnicas essenciais para proteger dados e sistemas:</p>
+        
+        <div class="skills-grid">
+          <div class="skill-item">
+            <h4>Redes de Computadores</h4>
+            <p>Identificar falhas e pontos vulneráveis em infraestrutura de rede.</p>
+          </div>
+
+          <div class="skill-item">
+            <h4>Sistemas Operacionais</h4>
+            <p>Administrar Windows, Linux e outros sistemas corporativos.</p>
+          </div>
+
+          <div class="skill-item">
+            <h4>Criptografia</h4>
+            <p>Proteger informações confidenciais através de codificação.</p>
+          </div>
+
+          <div class="skill-item">
+            <h4>Monitoramento e Resposta</h4>
+            <p>Detectar ataques e agir rapidamente em incidentes.</p>
+          </div>
+
+          <div class="skill-item">
+            <h4>Gestão de Vulnerabilidades</h4>
+            <p>Corrigir pontos fracos antes que sejam explorados.</p>
+          </div>
+
+          <div class="skill-item">
+            <h4>Segurança em Nuvem</h4>
+            <p>Proteger dados armazenados em ambientes cloud.</p>
+          </div>
+        </div>
+
+        <div class="example-box">
+          <strong>Exemplo:</strong> Aplicar criptografia em um banco de dados garante que só usuários autorizados possam acessar informações sensíveis.
+        </div>
+      </div>
+    </section>
+
+    <!-- HABILIDADES COMPORTAMENTAIS -->
+    <section id="habilidades-comportamentais" class="fade-up content-section">
+      <div class="container">
+        <h2 class="section-title">🧠 Habilidades Comportamentais</h2>
+        <p class="section-description">Não basta apenas conhecimento técnico. É preciso também:</p>
+        
+        <div class="behavioral-grid">
+          <div class="behavioral-item">
+            <span class="behavioral-icon">🔍</span>
+            <div>
+              <h4>Raciocínio Lógico</h4>
+              <p>E atenção a detalhes para identificar padrões e anomalias.</p>
+            </div>
+          </div>
+
+          <div class="behavioral-item">
+            <span class="behavioral-icon">⚖️</span>
+            <div>
+              <h4>Ética e Responsabilidade</h4>
+              <p>Ao lidar com dados confidenciais e informações sensíveis.</p>
+            </div>
+          </div>
+
+          <div class="behavioral-item">
+            <span class="behavioral-icon">💬</span>
+            <div>
+              <h4>Comunicação</h4>
+              <p>E trabalho em equipe para colaborar eficientemente.</p>
+            </div>
+          </div>
+
+          <div class="behavioral-item">
+            <span class="behavioral-icon">📈</span>
+            <div>
+              <h4>Atualização Constante</h4>
+              <p>Acompanhando novas ameaças e tecnologias do mercado.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONHECIMENTOS LEGAIS -->
+    <section id="conhecimentos-legais" class="fade-up content-section">
+      <div class="container">
+        <h2 class="section-title">⚖️ Conhecimentos Legais e Regulamentares</h2>
+        <p class="section-description">O especialista deve entender leis e normas que regulam o uso de dados:</p>
+        
+        <div class="legal-grid">
+          <div class="legal-card">
+            <h3>LGPD</h3>
+            <p>Lei Geral de Proteção de Dados - regras para coleta, armazenamento e compartilhamento de informações pessoais no Brasil.</p>
+          </div>
+
+          <div class="legal-card">
+            <h3>GDPR</h3>
+            <p>General Data Protection Regulation - norma europeia para proteção de dados, importante para empresas globais.</p>
+          </div>
+
+          <div class="legal-card">
+            <h3>Políticas Internas</h3>
+            <p>Desenvolvimento e implementação de políticas corporativas para proteger informações de clientes e colaboradores.</p>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <strong>Dica:</strong> Conhecer essas regras evita problemas jurídicos e garante atuação ética e segura.
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Especialista em Segurança da Informação. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="hidden" title="Voltar ao topo" aria-label="Voltar ao topo">↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>

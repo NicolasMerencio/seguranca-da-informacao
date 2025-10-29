@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leis e Proteção de Dados - Segurança da Informação</title>
+  <meta name="description" content="Entenda a LGPD, criptografia e boas práticas de proteção de dados na segurança da informação.">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="imagens/favicon/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <canvas id="backgroundParticles" aria-hidden="true"></canvas>
+
+  <header>
+    <div class="header-inner container">
+      <div class="logo">
+        <a href="index.html" aria-label="Ir para a página inicial">
+          <img src="imagens/index/logo.png" alt="Logotipo - Especialista de Segurança da Informação" width="120" height="120"/>
+        </a>
+        <h1 data-text-key="site-title">Especialista de Segurança da Informação</h1>
+      </div>
+
+      <nav id="main-nav" role="navigation" aria-label="Menu principal">
+        <ul id="navList">
+          <li><a href="formacao.html" data-text-key="nav-formacao">Formação e Habilidades</a></li>
+          <li><a href="areas.html" data-text-key="nav-areas">Áreas de Atuação</a></li>
+          <li><a href="leis.html" data-text-key="nav-leis" class="active">Leis e Proteção de Dados</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-controls">
+        <button id="darkModeToggle" aria-label="Ativar/Desativar modo escuro">🌙</button>
+        <select id="langToggle" aria-label="Selecionar idioma">
+          <option value="pt" selected>Português</option>
+          <option value="en">English</option>
+        </select>
+        <button class="nav-toggle" aria-label="Abrir menu mobile">☰</button>
+      </div>
+    </div>
+
+    <div class="mobile-nav" aria-hidden="true">
+      <button class="close-btn" aria-label="Fechar menu">×</button>
+      <ul>
+        <li><a href="formacao.html" data-text-key="nav-formacao">Formação e Habilidades</a></li>
+        <li><a href="areas.html" data-text-key="nav-areas">Áreas de Atuação</a></li>
+        <li><a href="leis.html" data-text-key="nav-leis" class="active">Leis e Proteção de Dados</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- HERÓI -->
+    <section id="intro" class="fade-up">
+      <div class="container">
+        <div class="intro-text">
+          <h1>Leis, Criptografia e Proteção de Dados</h1>
+          <p>A segurança da informação não se resume apenas a tecnologia — ela também envolve leis, regras e técnicas de proteção que garantem o uso responsável dos dados. Todo especialista precisa entender como essas partes se conectam para proteger tanto as empresas quanto os usuários.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LGPD -->
+    <section id="lgpd" class="fade-up content-section">
+      <div class="container">
+        <h2 class="section-title">📜 A Importância da LGPD</h2>
+        <p class="section-description">A LGPD é a principal lei brasileira que regula como as empresas e instituições devem coletar, armazenar e usar dados pessoais. Ela entrou em vigor em 2020 e trouxe mudanças importantes para garantir mais privacidade e transparência.</p>
+        
+        <div class="legal-grid">
+          <div class="legal-card">
+            <h3>Objetivo</h3>
+            <p>Proteger a privacidade das pessoas e evitar o uso indevido de informações pessoais.</p>
+          </div>
+
+          <div class="legal-card">
+            <h3>Exemplo Prático</h3>
+            <p>Uma empresa só pode pedir dados como CPF, endereço ou e-mail se realmente precisar deles — e deve explicar claramente para que vai usar.</p>
+          </div>
+
+          <div class="legal-card">
+            <h3>Consequências</h3>
+            <p>Quem descumpre a LGPD pode receber multas altas e perder a confiança do público.</p>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <strong>Dica:</strong> Conhecer a LGPD é essencial para o especialista, pois ele ajuda a empresa a seguir as normas e evitar problemas legais.
+        </div>
+      </div>
+    </section>
+
+    <!-- CRIPTOGRAFIA -->
+    <section id="criptografia" class="fade-up content-section">
+      <div class="container">
+        <h2 class="section-title">🔐 O Papel da Criptografia</h2>
+        <p class="section-description">A criptografia é uma das principais ferramentas usadas para manter dados seguros. Ela transforma as informações em códigos secretos que só podem ser lidos por quem tem a chave certa para decifrá-los.</p>
+        
+        <div class="skills-grid">
+          <div class="skill-item">
+            <h4>Como Funciona</h4>
+            <p>Imagine que uma mensagem é escrita com letras embaralhadas — apenas o destinatário autorizado consegue “desembaralhar” o texto.</p>
+          </div>
+
+          <div class="skill-item">
+            <h4>Uso Prático</h4>
+            <p>Proteger senhas, transações bancárias e comunicações online.</p>
+          </div>
+
+          <div class="skill-item">
+            <h4>Exemplo</h4>
+            <p>Quando você vê um cadeado na barra do navegador (HTTPS), significa que o site usa criptografia para proteger seus dados.</p>
+          </div>
+        </div>
+
+        <div class="example-box">
+          <strong>Curiosidade:</strong> Até aplicativos de mensagens, como o WhatsApp, usam criptografia de ponta a ponta, para que nem mesmo a empresa possa ler as conversas.
+        </div>
+      </div>
+    </section>
+
+    <!-- BOAS PRÁTICAS -->
+    <section id="boas-praticas" class="fade-up content-section">
+      <div class="container">
+        <h2 class="section-title">🛡️ Boas Práticas de Proteção de Dados</h2>
+        <p class="section-description">Além das leis e das ferramentas, a consciência das pessoas é parte essencial da segurança digital. O especialista também tem o papel de educar usuários e criar políticas internas que evitem erros humanos.</p>
+        
+        <div class="behavioral-grid">
+          <div class="behavioral-item">
+            <span class="behavioral-icon">🔑</span>
+            <div>
+              <h4>Senhas Fortes</h4>
+              <p>Usar senhas complexas e diferentes para cada conta.</p>
+            </div>
+          </div>
+
+          <div class="behavioral-item">
+            <span class="behavioral-icon">🔄</span>
+            <div>
+              <h4>Atualizações Regulares</h4>
+              <p>Manter sistemas e antivírus sempre atualizados.</p>
+            </div>
+          </div>
+
+          <div class="behavioral-item">
+            <span class="behavioral-icon">🚫</span>
+            <div>
+              <h4>Cuidado com Links</h4>
+              <p>Evitar clicar em links suspeitos ou baixar arquivos desconhecidos.</p>
+            </div>
+          </div>
+
+          <div class="behavioral-item">
+            <span class="behavioral-icon">💾</span>
+            <div>
+              <h4>Backups Frequentes</h4>
+              <p>Fazer cópias de segurança para não perder dados importantes.</p>
+            </div>
+          </div>
+
+          <div class="behavioral-item">
+            <span class="behavioral-icon">👥</span>
+            <div>
+              <h4>Controle de Acesso</h4>
+              <p>Restringir o acesso apenas a quem realmente precisa das informações.</p>
+            </div>
+          </div>
+
+          <div class="behavioral-item">
+            <span class="behavioral-icon">🎓</span>
+            <div>
+              <h4>Educação Continuada</h4>
+              <p>Treinar usuários sobre práticas seguras no ambiente digital.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <strong>Dica:</strong> A segurança da informação é um trabalho em equipe — não adianta ter um bom sistema se as pessoas não souberem usá-lo corretamente.
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Especialista em Segurança da Informação. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="hidden" title="Voltar ao topo" aria-label="Voltar ao topo">↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>

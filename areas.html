@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Áreas de Atuação - Segurança da Informação</title>
+  <meta name="description" content="Conheça as áreas de atuação, mercado de trabalho e especializações para um especialista em segurança da informação.">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="imagens/favicon/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <canvas id="backgroundParticles" aria-hidden="true"></canvas>
+
+  <header>
+    <div class="header-inner container">
+      <div class="logo">
+        <a href="index.html" aria-label="Ir para a página inicial">
+          <img src="imagens/index/logo.png" alt="Logotipo - Especialista de Segurança da Informação" width="120" height="120"/>
+        </a>
+        <h1 data-text-key="site-title">Especialista de Segurança da Informação</h1>
+      </div>
+
+      <nav id="main-nav" role="navigation" aria-label="Menu principal">
+        <ul id="navList">
+          <li><a href="formacao.html" data-text-key="nav-formacao">Formação e Habilidades</a></li>
+          <li><a href="areas.html" data-text-key="nav-areas" class="active">Áreas de Atuação</a></li>
+          <li><a href="leis.html" data-text-key="nav-leis">Leis e Proteção de Dados</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-controls">
+        <button id="darkModeToggle" aria-label="Ativar/Desativar modo escuro">🌙</button>
+        <select id="langToggle" aria-label="Selecionar idioma">
+          <option value="pt" selected>Português</option>
+          <option value="en">English</option>
+        </select>
+        <button class="nav-toggle" aria-label="Abrir menu mobile">☰</button>
+      </div>
+    </div>
+
+    <div class="mobile-nav" aria-hidden="true">
+      <button class="close-btn" aria-label="Fechar menu">×</button>
+      <ul>
+        <li><a href="formacao.html" data-text-key="nav-formacao">Formação e Habilidades</a></li>
+        <li><a href="areas.html" data-text-key="nav-areas" class="active">Áreas de Atuação</a></li>
+        <li><a href="leis.html" data-text-key="nav-leis">Leis e Proteção de Dados</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- HERÓI -->
+    <section id="intro" class="fade-up">
+      <div class="container">
+        <div class="intro-text">
+          <h1>Áreas de Atuação e Mercado de Trabalho</h1>
+          <p>O especialista em segurança da informação pode trabalhar em diversos setores, já que praticamente todas as empresas dependem de tecnologia. Hoje, essa profissão é uma das mais procuradas no mundo, justamente pela necessidade crescente de proteger dados e sistemas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ONDE ATUAR -->
+    <section id="onde-atuar" class="fade-up content-section">
+      <div class="container">
+        <h2 class="section-title">🏢 Onde esse profissional pode atuar</h2>
+        
+        <div class="cards-grid">
+          <div class="content-card">
+            <h3>Empresas de Tecnologia</h3>
+            <p>Monitorando servidores e prevenindo ataques em ambientes de TI.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>Bancos e Instituições Financeiras</h3>
+            <p>Protegendo transações e dados de clientes contra fraudes.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>Hospitais e Planos de Saúde</h3>
+            <p>Garantindo a privacidade de prontuários e exames médicos.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>Governo e Órgãos Públicos</h3>
+            <p>Mantendo seguras as informações de cidadãos e dados governamentais.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>Startups e E-commerces</h3>
+            <p>Evitando fraudes e vazamentos de dados em ambientes digitais.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>Consultorias de Segurança</h3>
+            <p>Oferecendo suporte e assessoria a diferentes organizações.</p>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <strong>Dica:</strong> Muitas dessas vagas podem ser remotas, e há alta demanda tanto no Brasil quanto no exterior.
+        </div>
+      </div>
+    </section>
+
+    <!-- MERCADO DE TRABALHO -->
+    <section id="mercado-trabalho" class="fade-up content-section">
+      <div class="container">
+        <h2 class="section-title">📈 Mercado de Trabalho</h2>
+        <p class="section-description">Nos últimos anos, o número de ataques cibernéticos aumentou muito, e isso fez crescer também a busca por especialistas. Empresas de todos os tamanhos estão investindo em segurança digital para proteger seus negócios.</p>
+        
+        <div class="skills-grid">
+          <div class="skill-item">
+            <h4>Alta Empregabilidade</h4>
+            <p>Há falta de profissionais qualificados — ou seja, quem se especializa, consegue boas oportunidades.</p>
+          </div>
+
+          <div class="skill-item">
+            <h4>Salários Competitivos</h4>
+            <p>Dependendo da experiência e da empresa, o salário pode variar entre R$ 5.000 e R$ 25.000 ou mais.</p>
+          </div>
+
+          <div class="skill-item">
+            <h4>Crescimento Constante</h4>
+            <p>Novas tecnologias (como nuvem, IA e IoT) geram novos desafios de segurança, o que garante que a área nunca fique parada.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ÁREAS DE ESPECIALIZAÇÃO -->
+    <section id="especializacao" class="fade-up content-section">
+      <div class="container">
+        <h2 class="section-title">🎯 Áreas de Especialização</h2>
+        <p class="section-description">O campo da segurança da informação é amplo. O profissional pode escolher se aprofundar em áreas específicas:</p>
+        
+        <div class="cards-grid">
+          <div class="content-card">
+            <h3>Cibersegurança</h3>
+            <p>Defesa contra invasões e ataques virtuais em redes e sistemas.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>Criptografia</h3>
+            <p>Proteção de dados por meio de códigos e senhas complexas.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>Análise Forense Digital</h3>
+            <p>Investigação de crimes virtuais e recuperação de dados.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>Gestão de Riscos</h3>
+            <p>Identificação e prevenção de possíveis ameaças à segurança.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>Segurança em Nuvem</h3>
+            <p>Proteção de dados armazenados online em ambientes cloud.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>Pentest</h3>
+            <p>Teste de invasão ética para encontrar falhas nos sistemas.</p>
+          </div>
+        </div>
+
+        <div class="example-box">
+          <strong>Exemplo:</strong> Um “pentester” é como um hacker ético — ele invade o sistema com autorização para encontrar pontos fracos antes que criminosos os descubram.
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Especialista em Segurança da Informação. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="hidden" title="Voltar ao topo" aria-label="Voltar ao topo">↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
